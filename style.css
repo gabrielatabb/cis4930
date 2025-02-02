@@ -2,6 +2,36 @@ div[id^="q"] p {
   margin-left: 20px;
 }
 
+
+.assignment-box{
+	background-color: #940242;
+	padding: 5px;
+	padding-left: 25px;
+	padding-right: 20px;
+	padding-bottom: 25px;
+	margin: auto;
+	margin: 30px;
+	border-radius: 10px;
+}
+
+.assignment-box p {
+    color: #e7e8e2;
+}
+
+.assignment-box a {
+	font-family: "Lucida Bright", Georgia, serif;
+    color: #e7e8e2;
+}
+
+.assignment-box a:visited {
+    color: #e7e8e2;
+}
+
+.assignment-box a:hover{
+	color: #fcbdd9;
+}
+
+
 a.back-to-quiz {
   margin-top: 10px;
   display: inline-block;
@@ -29,8 +59,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1{
+	font-family: "Lucida Bright", Georgia, serif;
 	margin-top: 40px;
 	text-align: center;
+	font-size: 40px;
 }
 
 p, li, td {

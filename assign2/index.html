@@ -1,0 +1,213 @@
+<html>
+<head>
+
+<script>
+    function submitFunc() {
+    	event.preventDefault();
+    	
+        const name = document.getElementById("fullName").value;
+        const email = document.getElementById("studentEmail").value;
+        const messageContainer = document.getElementById("formMessage");
+        const uflEmailPattern = /^[a-zA-Z0-9._%+-]+@ufl\.edu$/;
+        const studyLocation = document.querySelector('input[name="fav_study"]:checked');
+        const studyFrequency = document.getElementById("cars").value;
+        const crowdFrequency = document.getElementById("crowded").value;
+        const coffeeShopName = document.getElementById("coffeShop").value;
+
+        // Input validation
+        if (name === "") {
+            document.getElementById("name-question").innerHTML += '<span style="font-size: 25px; color: #990F02;" class="required"> *</span> ';
+            messageContainer.innerHTML = "<p style='font-size: 20px; color: #990F02;'>Please enter your full name.</p><br>";
+            return false;
+        }
+
+        if (!uflEmailPattern.test(email)) {
+            document.getElementById("email-question").innerHTML += '<span style="font-size: 25px; color: #990F02;" class="required"> *</span> ';
+            messageContainer.innerHTML = "<p style='font-size: 20px; color: #990F02;'>Please enter a valid ufl email.</p><br>";
+            return false;
+        }
+
+        if (!studyLocation) {
+            messageContainer.innerHTML += "<p style='font-size: 20px; color: #990F02;'>Please choose your favorite study location.</p><br>";
+            return false;
+        }
+
+        let studyMessage = '';
+        if (studyFrequency === "daily") {
+            studyMessage = "You study daily at " + studyLocation.value + ". It's great to have such a dedicated study routine!";
+        } else if (studyFrequency === "few-week") {
+            studyMessage = "You study a few times a week at " + studyLocation.value + ". Nice balance!";
+        } else if (studyFrequency === "once-week") {
+            studyMessage = "You study once a week at " + studyLocation.value + ". You might want to consider increasing your visits for better productivity.";
+        } else if (studyFrequency === "few-month") {
+            studyMessage = "You study only a few times a month at " + studyLocation.value + ". Perhaps consider visiting more often for better focus.";
+        }
+
+        if (studyLocation.value === "Coffee-Shop") {
+        if (coffeeShopName !== "") {
+            messageContainer.innerHTML += `<p>Your favorite coffee shop is: ${coffeeShopName}. Sounds like a great place to study!</p>`;
+        } else {
+            messageContainer.innerHTML += "<p>You mentioned 'Coffee-Shop' but didn't specify which one. Let us know next time!</p>";
+        }
+
+        let crowdMessage = '';
+        switch(crowdFrequency) {
+            case 'always':
+                crowdMessage = "It seems like the location is always crowded when you go. Maybe you want to choose another time or location.";
+                break;
+            case 'often':
+                crowdMessage = "The location is often crowded. Perhaps try studying during off-peak hours!";
+                break;
+            case 'sometimes':
+                crowdMessage = "The location is sometimes crowded. It's still a good spot for studying!";
+                break;
+            case 'rarely':
+                crowdMessage = "The location is rarely crowded. Perfect for a quiet study session!";
+                break;
+            default:
+                crowdMessage = "Please specify how crowded the location is.";
+        }
+
+        messageContainer.innerHTML += `<p>${studyMessage}</p><br>`;
+        messageContainer.innerHTML += `<p>${crowdMessage}</p><br>`;
+
+        messageContainer.innerHTML += "<p style='font-size: 20px; color: #007848;'>Survey submitted successfully! Thank you for your responses.</p>";
+        
+        return true;
+
+     }
+</script>
+    
+
+<style>
+
+h1{
+	margin: 8px;
+	margin-top: 35px;
+	margin-bottom: 35px;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+</style>
+
+	<link rel="stylesheet" href="../style.css"></link>
+	<title>Survey</title>
+</head>
+<body>
+
+<div class="columns-container">
+<div class="box-1"></div>
+
+<div class="box-2">
+	<h1 style="margin-bottom: 0px;">Favorite Places to Study</h1>
+	<h1 style="margin-top: 0px;">in Gainesville Survey</h1>
+
+<div class="form-alignment">
+
+	<p class="question" id="name-question">1. Enter your full name</p>
+	<input type="text" id="fullName" class="text-input-box" placeholder="Enter Full Name"></input>
+
+	<p class="question" id="email-question">2. Enter your student email</p>
+	<input type="text" id="studentEmail" class="text-input-box" placeholder="Enter Student Email"></input>
+
+	<p class="question">3. Choose your favorite place to study in Gainesville:</p>
+
+<form>
+<div style="margin-left: 25px;">
+  <input type="radio" id="Newell" name="fav_study" value="Newell">
+  <label for="Newell">Newell</label>
+  <br>
+
+  <input type="radio" id="Marston-Science-Library" name="fav_study" value="Marston-Science-Library">
+  <label for="Marston-Science-Library">Marston Science Library</label>
+  <br>
+
+  <input type="radio" id="Library-West" name="fav_study" value="Library-West">
+  <label for="Library-West">Library West</label>
+  <br>
+
+  <input type="radio" id="Plaza-of-Americas" name="fav_study" value="Plaza-of-Americas">
+  <label for="Plaza-of-Americas">Plaza of Americas</label>
+  <br>
+  
+  <input type="radio" id="Norman" name="fav_study" value="Norman">
+  <label for="Norman">Norman Hall</label>
+  <br>
+  
+  <input type="radio" id="Coffee-Shop" name="fav_study" value="Coffee-Shop">
+  <label for="Coffee-Shop">Coffee Shop</label>
+</div>
+  <br>
+
+	<p class="question">4. If you chose "Coffee Shop" what if the name of your</p>
+	<p style="margin-top: 0px;" class="question">favorite coffee shop to study at. If not write "N/A".</p>
+	<input type="text" id="coffeShop" class="text-input-box" placeholder="Enter text"></input>
+
+<p class="question">5. What makes this your favorite place to study?</p>
+<div style="margin-left: 25px;">
+  <input type="checkbox" id="reason1" name="reason1" value="chairs">
+  <label for="vehicle1"> The chairs</label><br>
+  
+  <input type="checkbox" id="reason2" name="reason2" value="environment">
+  <label for="reason2"> The environment</label><br>
+  
+  <input type="checkbox" id="reason3" name="reason3" value="loaction">
+  <label for="reason3"> The location</label><br>
+  
+  <input type="checkbox" id="reason4" name="reason4" value="people">
+  <label for="reason4"> The people</label><br>
+  
+  <input type="checkbox" id="reason5" name="reason5" value="tables">
+  <label for="reason5"> The tables</label><br>
+  
+  <input type="checkbox" id="reason6" name="reason6" value="cafe">
+  <label for="reason6"> The cafe</label><br>
+  
+  <input type="checkbox" is="reason7" name="reason7" value="food">
+  <label for="reason7"> The food</label><br>
+</div>
+
+<p class="question">6. How often do you study at this location?</p>
+<label style="margin-left: 25px;" for="cars">Choose an option:</label>
+  <select name="cars" id="cars">
+  	<option value="" disabled selected>Select an option</option>
+    <option value="daily">Daily</option>
+    <option value="few-week">A few times a week</option>
+    <option value="once-week">Once a week</option>
+    <option value="few-month">A few times a month</option>
+  </select>
+  <br><br>
+  
+<p class="question">7. Is this location usually crowded when you go?</p>
+<label style="margin-left: 25px;" for="cars">Choose an option:</label>
+  <select name="crowded" id="crowded">
+  	<option value="" disabled selected>Select an option</option>
+    <option value="always">Always</option>
+    <option value="often">Often</option>
+    <option value="somtimes">Sometimes</option>
+    <option value="rarely">Rarely</option>
+  </select>
+  <br><br>
+  
+  <button style="font-size: 12px; padding: 6px 10px;" type="reset" value="Reset">Reset</button><br><br>
+  
+  
+  <div id="formMessage"></div>
+  <button style="margin-bottom: 25px;" onclick="submitFunc()">Submit</button>
+</form>
+
+</div>
+</div> 
+
+
+<div class="box-3"></div>
+
+</div>
+
+</body>
+</html>

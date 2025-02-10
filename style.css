@@ -2,6 +2,72 @@ div[id^="q"] p {
   margin-left: 20px;
 }
 
+.columns-container{
+	display: flex;
+	align-items: stretch;
+	min-height: 100vh;
+}
+
+.question{
+	margin-top: 25px;
+   font-size: 22px;
+}
+
+.box-1{
+	flex-grow: 4;
+	background-color: #e7e8e2;
+}
+
+.box-2{
+	flex-grow: 3;
+	height: 100%;
+	background-color: #7285A5;
+}
+
+.form-alignment{
+	margin-left: 200px;
+}
+
+.box-3{
+	flex-grow: 4;
+	background-color: #e7e8e2;
+}
+
+button {
+	text-align: center;
+    background-color: #dddddd;
+    color: #333333;
+    padding: 12px 20px; 
+    font-size: 18px; 
+    border: 1px solid black;
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #3E424B;
+}
+
+button:active {
+    transform: scale(0.95)
+}
+
+
+h1{
+	font-family: "Lucida Bright", Georgia, serif;
+	margin-top: 40px;
+	text-align: center;
+	font-size: 40px;
+	width: 100%;
+}
+
+.text-input-box{
+	width: 500px;
+    height: 40px;
+    padding-top: 0px;
+    padding-left: 10px
+}
 
 .assignment-box{
 	background-color: #940242;
@@ -31,7 +97,6 @@ div[id^="q"] p {
 	color: #fcbdd9;
 }
 
-
 a.back-to-quiz {
   margin-top: 10px;
   display: inline-block;
@@ -55,14 +120,8 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Arial', sans-serif;
-}
+ font-family: "Lucida Bright", Georgia, serif;
 
-h1{
-	font-family: "Lucida Bright", Georgia, serif;
-	margin-top: 40px;
-	text-align: center;
-	font-size: 40px;
 }
 
 p, li, td {

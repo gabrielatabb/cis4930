@@ -3,10 +3,12 @@
 
 <script>
     function submitFunc() {
+    	console.log("hi");
     	event.preventDefault();
     	
         const name = document.getElementById("fullName").value;
         const email = document.getElementById("studentEmail").value;
+        console.log(email);
         const messageContainer = document.getElementById("formMessage");
         const uflEmailPattern = /^[a-zA-Z0-9._%+-]+@ufl\.edu$/;
         const studyLocation = document.querySelector('input[name="fav_study"]:checked');
@@ -14,7 +16,6 @@
         const crowdFrequency = document.getElementById("crowded").value;
         const coffeeShopName = document.getElementById("coffeShop").value;
 
-        // Input validation
         if (name === "") {
             document.getElementById("name-question").innerHTML += '<span style="font-size: 25px; color: #990F02;" class="required"> *</span> ';
             messageContainer.innerHTML = "<p style='font-size: 20px; color: #990F02;'>Please enter your full name.</p><br>";
@@ -48,6 +49,7 @@
             messageContainer.innerHTML += `<p>Your favorite coffee shop is: ${coffeeShopName}. Sounds like a great place to study!</p>`;
         } else {
             messageContainer.innerHTML += "<p>You mentioned 'Coffee-Shop' but didn't specify which one. Let us know next time!</p>";
+        }
         }
 
         let crowdMessage = '';

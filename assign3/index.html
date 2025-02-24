@@ -1,0 +1,183 @@
+<html>
+<head>
+<link rel="stylesheet" href="../style.css"></link>
+<script src="statistics.js"></script>
+<script>
+	function getNums(event)
+	{
+		event.preventDefault();
+		var strVals = document.getElementById('strVals').value;
+		const myArray = strVals.split(",");
+		var numArray = [];
+		for(var i = 0; i < myArray.length; i++){
+			numArray[i] = parseInt(myArray[i]);
+		}
+		
+		document.getElementById('num').innerHTML = findN(numArray);
+		document.getElementById('sum').innerHTML = findSum(numArray);
+		document.getElementById('mean').innerHTML = findMean(numArray)
+		document.getElementById('median').innerHTML = findMedian(numArray);
+		document.getElementById('mode').innerHTML = findMode(numArray);
+		document.getElementById('max').innerHTML = findMax(numArray);
+		document.getElementById('min').innerHTML = findMin(numArray);
+		document.getElementById('range').innerHTML = findRange(numArray);
+		document.getElementById('iqr').innerHTML = findInterquartileRange(numArray);
+		document.getElementById('variance').innerHTML = findVariance(numArray);
+		document.getElementById('standardDev').innerHTML = findStandardDeviation(numArray);
+		document.getElementById('skew').innerHTML = findSkewness(numArray);
+		document.getElementById('kurtosis').innerHTML = findKurtosis(numArray);
+	}
+</script>
+</head>
+<body>
+
+<form>
+<h3>Please enter numbers:</h3>
+	<input type="text" id="strVals" class="text-input-box" placeholder="Enter Numbers"></input><br>
+	<input type="button" value="Get Statistics" onclick="getNums(event)">
+</form>
+
+<h3>Statistics results:</h3>
+ N: 
+<span id="num"></span>
+<br>
+Summation: <span id='sum'></span><br>
+Mean: <span id='mean'></span><br>
+Median: <span id='median'></span><br>
+Mode: <span id='mode'></span><br>
+Max: <span id='max'></span><br>
+Min: <span id='min'></span><br>
+Range: <span id='range'></span><br>
+IQR: <span id='iqr'></span><br>
+Variance: <span id='variance'></span><br>
+Standard Deviation: <span id='standardDev'></span><br>
+Skewness: <span id='skew'></span><br>
+Kurtosis: <span id='kurtosis'></span><br><br><br><br><br><br>
+
+<h4>Unit Test Results for Statistics Library</h4>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Test Case</th>
+      <th>Function</th>
+      <th>Expected Output</th>
+      <th>Actual Output</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+    <tr>
+      <td>Typical Data</td>
+      <td>findMean</td>
+      <td>Expected: 3.33</td>
+      <td>Actual: 3.3333333333333335</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Typical Data</td>
+      <td>findMedian</td>
+      <td>Expected: 3.5</td>
+      <td>Actual: 3.5</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Typical Data</td>
+      <td>findMode</td>
+      <td>Expected: 5</td>
+      <td>Actual: 5</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Typical Data</td>
+      <td>findSkewness</td>
+      <td>Expected: -0.2795</td>
+      <td>Actual: -0.2795</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Typical Data</td>
+      <td>findKurtosis</td>
+      <td>Expected: 1.635</td>
+      <td>Actual: 1.635</td>
+      <td>PASS</td>
+    </tr>
+
+
+    <tr>
+      <td>Edge Case - Single Element</td>
+      <td>findMean</td>
+      <td>Expected: 1</td>
+      <td>Actual: 1</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Edge Case - Single Element</td>
+      <td>findMedian</td>
+      <td>Expected: 1</td>
+      <td>Actual: 1</td>
+      <td>PASS</td>
+    </tr>
+
+
+    <tr>
+      <td>Edge Case - Two Elements</td>
+      <td>findMean</td>
+      <td>Expected: 1.5</td>
+      <td>Actual: 1.5</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Edge Case - Two Elements</td>
+      <td>findMedian</td>
+      <td>Expected: 1.5</td>
+      <td>Actual: 1.5</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Edge Case - Empty List</td>
+      <td>findMean</td>
+      <td>Expected: 0</td>
+      <td>Actual: 0</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Edge Case - Empty List</td>
+      <td>findMedian</td>
+      <td>Expected: 0</td>
+      <td>Actual: 0</td>
+      <td>PASS</td>
+    </tr>
+
+
+    <tr>
+      <td>Large Data Set</td>
+      <td>findMean</td>
+      <td>Expected: 8</td>
+      <td>Actual: 8</td>
+      <td>PASS</td>
+    </tr>
+
+    <tr>
+      <td>Large Data Set</td>
+      <td>findSkewness</td>
+      <td>Expected: 0</td>
+      <td>Actual: 0</td>
+      <td>PASS</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
+</body>
+</html>

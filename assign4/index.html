@@ -1,0 +1,190 @@
+<html lang="en">
+<head>
+  <title>Survey</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../style.css"></link>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+	$(document).ready(function () {
+    $("#surveyForm").on("submit", function (event) {
+        event.preventDefault();
+        
+        console.log("Hi");
+        
+        let name = $("#name").val().trim();
+        let email = $("#email").val().trim();
+        let messageContainer = $("#formMessage");
+        let uflEmailPattern = /^[a-zA-Z0-9._%+-]+@ufl\.edu$/;
+        let studyLocation = $("input[name='optradio']:checked").val();
+        let studyFrequency = $("#studyFrequency").val();
+        let crowdFrequency = $("#crowded").val();
+        let coffeeShopName = $("#coffe-shop").val().trim();
+        
+        messageContainer.html("");
+
+        if (!name) {
+            $("label[for='name']").append('<span class="required"> *</span>');
+			$("label[for='name']").css("color", "#B90E0A");
+            messageContainer.html("<p class='error-message'>Please enter your full name.</p>");
+            return false;
+        }
+
+        if (!uflEmailPattern.test(email)) {
+            $("label[for='email']").append('<span class="required"> *</span>');
+			$("label[for='email']").css("color", "#B90E0A");
+            messageContainer.html("<p class='error-message'>Please enter a valid UFL email.</p>");
+            return false;
+        }
+
+        if (!studyLocation) {
+            messageContainer.append("<p class='error-message'>Please choose your favorite study location.</p>");
+            return false;
+        }
+
+        let studyMessage = `You study ${studyFrequency.replace('-', ' ')} at ${studyLocation.replace('-', ' ')}.`;
+        
+        if (studyLocation === "Coffee-shop") {
+            if (coffeeShopName) {
+                studyMessage += ` Your favorite coffee shop is: ${coffeeShopName}.`;
+            } else {
+                studyMessage += " You mentioned 'Coffee-Shop' but didn't specify which one.";
+            }
+        }
+
+        const crowdMessages = {
+            always: "It seems like the location is always crowded. Maybe try a different time or place.",
+            often: "The location is often crowded. Consider studying during off-peak hours!",
+            sometimes: "The location is sometimes crowded. It's still a good spot for studying!",
+            rarely: "The location is rarely crowded. Perfect for a quiet study session!"
+        };
+
+        messageContainer.append(`<p style="color: aliceblue;">${studyMessage}</p>`);
+        messageContainer.append(`<p style="color: aliceblue;">${crowdMessages[crowdFrequency] || "Please specify how crowded the location is."}</p>`);
+        messageContainer.append("<p  style='color: aliceblue;' class='success-message'>Survey submitted successfully! Thank you for your responses.</p>");
+        
+        return true;
+    });
+});
+
+</script>
+</head>
+<body>
+	<div>
+  <div class="row">
+    <div style="background-color: #e7e8e2;" class="col"></div>
+    <div style="background-color: #7285A5;" class="col-6"><br>
+      <p style="font-family: Lucida Bright;" class="h1 text-center">Favorite Places to Study</p>
+      <p style="font-family: Lucida Bright;" class="h1 text-center"> in Gainesville Survey</p>
+      
+<div class="mx-auto" style="width: 700px;">
+	<form id="surveyForm" action="#">
+  		<div class="mb-3 mt-3">
+    		<label for="name" class="form-label">1. Enter your full name:</label>
+    		<input type="text" class="form-control" id="name" placeholder="Enter full name" name="name">
+  		</div>
+		<div class="mb-3">
+    		<label for="email" class="form-label">2. Enter your student email:</label>
+    		<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+  		</div>
+
+  		
+		<label for="study" class="form-label">3. Choose your favorite place to study in Gainesville:</label>
+		<div class="form-check">
+  			<input type="radio" class="form-check-input" id="radio1" name="optradio" value="Newell" checked>Newell
+  			<label class="form-check-label" for="radio1"></label>
+		</div>
+		<div class="form-check">
+  			<input type="radio" class="form-check-input" id="radio2" name="optradio" value="Marston">Marston Science Library
+  			<label class="form-check-label" for="radio2"></label>
+		</div>
+		<div class="form-check">
+  			<input type="radio" class="form-check-input" id="radio3" name="optradio" value="Lib-west">Library West
+  			<label class="form-check-label" for="radio3"></label>
+		</div>
+		<div class="form-check">
+  			<input type="radio" class="form-check-input" id="radio4" name="optradio" value="Plaza-americas">Plaza of Americas
+  			<label class="form-check-label" for="radio4"></label>
+		</div>
+		<div class="form-check">
+  			<input type="radio" class="form-check-input" id="radio5" name="optradio" value="Norman">Norman Hall  		
+  			<label class="form-check-label" for="radio5"></label>
+		</div>
+		<div class="form-check">
+  			<input type="radio" class="form-check-input" id="radio6" name="optradio" value="Coffee-shop">Coffee Shop  		
+  			<label class="form-check-label" for="radio6"></label>
+		</div>
+		
+		<div class="mb-3 mt-3">
+    		<label for="coffee-shop" class="form-label">4. If you chose "Coffee Shop" what if the name of your</label><br>
+			<label for="coffee-shop" class="form-label">favorite coffee shop to study at. If not write "N/A".</label>
+    		<input type="text" class="form-control" id="coffe-shop" placeholder="Enter coffee shop" name="coffee-shop">
+  		</div>
+  		
+		<label for="favorite-study" class="form-label">5. What makes this your favorite place to study?</label>
+  		<div class="form-check">
+      		<input type="checkbox" class="form-check-input" id="check1" name="option1" value="chairs" checked>
+      		<label class="form-check-label" for="check1">The chairs</label>
+    	</div>
+    	<div class="form-check">
+      		<input type="checkbox" class="form-check-input" id="check2" name="option2" value="environment">
+      		<label class="form-check-label" for="check2"> The environment</label>
+    	</div>
+    	<div class="form-check">
+      		<input type="checkbox" class="form-check-input" id="check3" name="option3" value="location">
+      		<label class="form-check-label" for="check3">The location</label>
+    	</div>
+		<div class="form-check">
+			<input type="checkbox" class="form-check-input" id="check4" name="option4" value="people">
+			<label class="form-check-label" for="check4">The people</label>
+		</div>
+		<div class="form-check">
+			<input type="checkbox" class="form-check-input" id="check5" name="option5" value="tables">
+			<label class="form-check-label" for="check5">The tables</label>
+		</div>
+		<div class="form-check">
+			<input type="checkbox" class="form-check-input" id="check6" name="option6" value="cafe">
+			<label class="form-check-label" for="check6">The cafe</label>
+		</div>
+		<div class="form-check">
+			<input type="checkbox" class="form-check-input" id="check7" name="option7" value="food">
+			<label class="form-check-label" for="check7">The food</label><br>
+		</div>
+		<br>
+		<label for="studyFrequency" class="form-label">How often do you study?</label>
+		<select class="form-select" id="studyFrequency" name="studyFrequency">
+				<option selected>Choose an option</option>
+      			<option>daily</option>
+      			<option>a few times a week</option>
+      			<option>once a week</option>
+      			<option>a few times a month</option>
+    		</select>
+    	<br>
+    	<label for="crowded" class="form-label">7. Is this location usually crowded when you go?</label><br>
+			<select class="form-select" id="crowded" name="sellist1">
+				<option selected>Choose an option</option>
+				<option>always</option>
+				<option>often</option>
+				<option>sometimes</option>
+				<option>rarely</option>
+			</select>
+    	<br>
+
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+	<div style="color: aliceblue;" class="mb-3">
+		<label for="formMessage" class="form-label">Message:</label>
+		<div id="formMessage"></div>
+	</div>
+
+	</div>
+    </div>
+    <div style="background-color: #e7e8e2;" class="col"></div>
+  </div>
+</div>
+
+
+</body>
